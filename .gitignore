@@ -1,0 +1,6 @@
+# compiled python files
+*.py[co]
+__pycache__/
+
+# vs code files
+/.vscode
