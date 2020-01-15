@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_xp_knowledge_xp_knowledge,xp_knowledge.xp_knowledge,model_xp_knowledge_xp_knowledge,base.group_user,1,1,1,1
