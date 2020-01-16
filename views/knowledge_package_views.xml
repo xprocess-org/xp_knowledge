@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="knowledge_package_action" model="ir.actions.act_window">
+        <field name="name">Packages</field>
+        <field name="res_model">knowledge.package</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="knowledge_package_menu" name="Packages" action="knowledge_package_action" parent="configuration_menu" sequence="10" />
+
+</odoo>

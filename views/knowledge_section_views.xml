@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="knowledge_section_action" model="ir.actions.act_window">
+        <field name="name">Sections</field>
+        <field name="res_model">knowledge.section</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="knowledge_section_menu" name="Sections" action="knowledge_section_action" parent="configuration_menu" sequence="30" />
+
+</odoo>

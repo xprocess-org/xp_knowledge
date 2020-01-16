@@ -19,10 +19,12 @@
 
     # always loaded
     'data': [
-        'security/knowledge_security.xml',
+        'security/knowledge_groups.xml',
         'security/ir.model.access.csv',
-        # 'views/views.xml',
-        # 'views/templates.xml',
+        'views/knowledge_menus.xml',
+        'views/knowledge_package_views.xml',
+        'views/knowledge_document_views.xml',
+        'views/knowledge_section_views.xml',
     ],
     # only loaded in demonstration mode
     # 'demo': [

@@ -7,4 +7,5 @@ class Section(models.Model):
     _name = 'knowledge.section'
     _description = 'Section'
 
-    name = fields.Char('Title', required=True)
+    name = fields.Char(_('Title'), required=True)
+    content = fields.Html(_('Section content'))
