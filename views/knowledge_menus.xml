@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <menuitem id="xp_knowledge_menu" name="Knowledge" sequence="2" />
-    <menuitem id="configuration_menu" name="Configuration" groups="group_xp_knowledge_manager" parent="xp_knowledge_menu" sequence="100" />
+    <menuitem id="knowledge_menu" name="Knowledge" sequence="2" />
+    <menuitem id="configuration_menu" name="Configuration" groups="group_knowledge_manager" parent="knowledge_menu" sequence="100" />
 
 </odoo>
 
