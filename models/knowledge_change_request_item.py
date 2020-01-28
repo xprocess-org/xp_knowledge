@@ -8,6 +8,7 @@ class Change(models.Model):
     _description = 'Change'
 
     name = fields.Char('Summary', required=True)
+    content = fields.Html(string='Content')
     change_request_id = fields.Many2one(
         'knowledge.change.request', string='Change request')
     document_id = fields.Many2one(
@@ -27,3 +28,7 @@ class Change(models.Model):
             ('rejected', 'Rejected')],
         default='draft')
     rejection_reason = fields.Text(string='Rejection reason')
+
+    editor_id = fields.Many2one('res.partner', string='Editor')
+    reviewer_id = fields.Many2one('res.partner', string='Reviewer')
+    approver_id = fields.Many2one('res.partner', string='Approver')

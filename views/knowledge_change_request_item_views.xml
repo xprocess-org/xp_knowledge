@@ -17,6 +17,7 @@
                 <field name="name" />
                 <field name="change_request_id" />
                 <field name="document_id" />
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -27,8 +28,22 @@
         <field name="arch" type="xml">
             <form string="">
                 <sheet>
+                    <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="o_task_name text-truncate" placeholder="Summary..."/>
+                        </h1>
+                    </div>
                     <group>
-
+                        <group>
+                            <field name="change_request_id" />
+                            <field name="document_id" />
+                            <field name="state" />
+                        </group>
+                        <group>
+                            <field name="editor_id" />
+                            <field name="reviewer_id" />
+                            <field name="approver_id" />
+                        </group>
                     </group>
                 </sheet>
             </form>
