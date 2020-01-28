@@ -9,4 +9,16 @@
 
     <menuitem id="knowledge_section_menu" name="Sections" action="knowledge_section_action" parent="configuration_menu" sequence="30" />
 
+    <record id="knowledge_section_view_list" model="ir.ui.view">
+        <field name="name">knowledge_section_list_view</field>
+        <field name="model">knowledge.section</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="write_uid" />
+                <field name="write_date" />
+            </tree>
+        </field>
+    </record>
+
 </odoo>

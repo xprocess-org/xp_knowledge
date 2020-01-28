@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="knowledge_change_request_action" model="ir.actions.act_window">
+        <field name="name">Change Requests</field>
+        <field name="res_model">knowledge.change.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="knowledge_change_request_menu" name="Change Requests" action="knowledge_change_request_action" parent="knowledge_menu" sequence="20" />
+
+    <record id="knowledge_change_request_view_list" model="ir.ui.view">
+        <field name="name">knowledge_change_request_list_view</field>
+        <field name="model">knowledge.change.request</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="name" />
+                <field name="create_uid" />
+                <field name="create_date" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="knowledge_change_request_view_form" model="ir.ui.view">
+        <field name="name">knowledge_change_request_form_view</field>
+        <field name="model">knowledge.change.request</field>
+        <field name="arch" type="xml">
+            <form string="Change Request">
+                <header>
+                    <button name="submit_change_request" string="Submit" type="object" class="oe_highlight" attrs="{'invisible' : [('state', '!=', 'draft')]}"/>
+                    <button name="approve_change_request" string="Approve" type="object" class="oe_highlight" attrs="{'invisible' : [('state', '!=', 'submitted')]}"/>
+                    <button name="reject_change_request" string="Reject" type="object" attrs="{'invisible' : [('state', '!=', 'submitted')]}"/>
+                    <button name="open_change_request" string="Open" type="object" class="oe_highlight" attrs="{'invisible' : [('state', '!=', 'approved')]}"/>
+                    <button name="close_change_request" string="Close" type="object" class="oe_highlight" attrs="{'invisible' : [('state', '!=', 'open')]}"/>
+                    <button name="reopen_change_request" string="Reopen" type="object" attrs="{'invisible' : [('state', '!=', 'closed')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved,open,closed"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Rejected" bg_color="bg-danger" attrs="{'invisible' : [('state', '!=', 'rejected')]}"/>
+                    <widget name="web_ribbon" title="Closed" bg_color="bg-success" attrs="{'invisible' : [('state', '!=', 'closed')]}"/>
+                    <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="text-truncate" placeholder="Change Request Title..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="create_uid" />
+                            <field name="create_date" />
+                        </group>
+                        <group>
+                            <field name="package_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Description" string="Description">
+                            <field name="description" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                        </page>
+                        <page name="Change List" string="Change List">
+                            <field name="section_ids" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- mail mixin fields -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+</odoo>
