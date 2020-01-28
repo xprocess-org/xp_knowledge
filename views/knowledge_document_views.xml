@@ -29,6 +29,7 @@
         <field name="arch" type="xml">
             <form string="Document">
                 <sheet>
+                    <widget name="web_ribbon" title="Canceled" bg_color="bg-danger" attrs="{'invisible' : [('state', '!=', 'canceled')]}"/>
                     <div class="oe_title pr-0">
                         <h1 class="d-flex flex-row justify-content-between">
                             <field name="name" class="text-truncate" placeholder="Document Title..."/>
