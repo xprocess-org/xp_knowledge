@@ -57,8 +57,8 @@
                         <page name="Description" string="Description">
                             <field name="description" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                         </page>
-                        <page name="Change List" string="Change List">
-                            <field name="section_ids" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                        <page name="change_list" string="Change List">
+                            <field name="change_item_ids" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                         </page>
                     </notebook>
                 </sheet>

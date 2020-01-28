@@ -24,7 +24,7 @@
         'views/knowledge_menus.xml',
         'views/knowledge_package_views.xml',
         'views/knowledge_document_views.xml',
-        'views/knowledge_section_views.xml',
+        'views/knowledge_change_request_item_views.xml',
         'views/knowledge_change_request_views.xml',
     ],
     # only loaded in demonstration mode

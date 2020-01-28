@@ -10,8 +10,8 @@ class ChangeRequest(models.Model):
 
     name = fields.Char('Title', required=True)
     description = fields.Html('Details')
-    section_ids = fields.One2many(
-        'knowledge.section', 'change_request_id', string='Sections')
+    change_item_ids = fields.One2many(
+        'knowledge.change.request.item', 'change_request_id', string='Change Items')
     package_id = fields.Many2one(
         'knowledge.package', string='Package', required=True)
     state = fields.Selection(

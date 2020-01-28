@@ -38,6 +38,7 @@
                         <group>
                             <field name="code" />
                             <field name="owner_id" />
+                            <field name="package_id" />
                         </group>
                         <group>
                             <field name="issue_number" />
@@ -45,10 +46,13 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="contents" string="Contents">
-                            <field name="section_ids" />
+                        <page name="contents" string="Content">
+                            <field name="content" />
                         </page>
-                        <page name="changes" string="Changes">
+                        <page name="changes" string="Change History">
+                            <field name="change_item_ids" />
+                        </page>
+                        <page name="related_documents" string="Related Documents">
 
                         </page>
                         <page name="settings" string="Settings">
