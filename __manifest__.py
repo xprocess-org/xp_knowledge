@@ -26,6 +26,7 @@
         'views/knowledge_document_views.xml',
         'views/knowledge_change_request_item_views.xml',
         'views/knowledge_change_request_views.xml',
+        'views/knowledge_distribution_list_views.xml',
     ],
     # only loaded in demonstration mode
     # 'demo': [

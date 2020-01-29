@@ -26,3 +26,5 @@ class Document(models.Model):
             ('active', 'Active'),
             ('canceled', 'Canceled')],
         default='draft')
+    distribution_list_ids = fields.Many2many(
+        'knowledge.distribution.list', string='Distribution lists')

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="knowledge_distribution_list_action" model="ir.actions.act_window">
+        <field name="name">Distribution lists</field>
+        <field name="res_model">knowledge.distribution.list</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="knowledge_distribution_list_menu" name="Distribution lists" action="knowledge_distribution_list_action" parent="configuration_menu" sequence="40" />
+
+    <record id="knowledge_distribution_list_view_list" model="ir.ui.view">
+        <field name="name">knowledge_distribution_list_list_view</field>
+        <field name="model">knowledge.distribution.list</field>
+        <field name="arch" type="xml">
+            <tree string="Distribution list">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="knowledge_distribution_list_view_form" model="ir.ui.view">
+        <field name="name">knowledge_distribution_list_form_view</field>
+        <field name="model">knowledge.distribution.list</field>
+        <field name="arch" type="xml">
+            <form string="Distribution List">
+                <sheet>
+                    <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="text-truncate" placeholder="Distribution List Title..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="create_uid" />
+                            <field name="create_date" />
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="distribution_list" string="Distribution list">
+                            <field name="partner_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- mail mixin fields -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

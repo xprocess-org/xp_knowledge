@@ -53,14 +53,13 @@
                         <page name="contents" string="Content">
                             <field name="content" />
                         </page>
+                        <page name="related_documents" string="Related Documents">
+                        </page>
+                        <page name="distribution_lists" string="Distribution lists">
+                            <field name="distribution_list_ids" />
+                        </page>
                         <page name="changes" string="Change History">
                             <field name="change_item_ids" />
-                        </page>
-                        <page name="related_documents" string="Related Documents">
-
-                        </page>
-                        <page name="settings" string="Settings">
-
                         </page>
                     </notebook>
                 </sheet>
