@@ -6,6 +6,7 @@ from odoo import _, api, fields, models
 class Change(models.Model):
     _name = 'knowledge.change.request.item'
     _description = 'Change'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char('Summary', required=True)
     content = fields.Html(string='Content')

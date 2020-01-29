@@ -2,12 +2,12 @@
 <odoo>
 
     <record id="knowledge_change_request_item_action" model="ir.actions.act_window">
-        <field name="name">Change History</field>
+        <field name="name">Changes</field>
         <field name="res_model">knowledge.change.request.item</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="knowledge_change_request_item_menu" name="Change History" action="knowledge_change_request_item_action" parent="configuration_menu" sequence="30" />
+    <menuitem id="knowledge_change_request_item_menu" name="Changes" action="knowledge_change_request_item_action" parent="configuration_menu" sequence="30" />
 
     <record id="knowledge_change_request_item_view_list" model="ir.ui.view">
         <field name="name">knowledge_change_request_item_list_view</field>
@@ -26,7 +26,10 @@
         <field name="name">knowledge_change_request_item_form_view</field>
         <field name="model">knowledge.change.request.item</field>
         <field name="arch" type="xml">
-            <form string="">
+            <form string="Change Item">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,inprogress,done,reviewed,approved"/>
+                </header>
                 <sheet>
                     <div class="oe_title pr-0">
                         <h1 class="d-flex flex-row justify-content-between">
@@ -37,7 +40,6 @@
                         <group>
                             <field name="change_request_id" />
                             <field name="document_id" />
-                            <field name="state" />
                         </group>
                         <group>
                             <field name="editor_id" />
@@ -45,7 +47,18 @@
                             <field name="approver_id" />
                         </group>
                     </group>
+                    <notebook>
+                        <page name="content" string="Draft">
+                            <field name="content" />
+                        </page>
+                    </notebook>
                 </sheet>
+                <!-- mail mixin fields -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
