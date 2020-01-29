@@ -28,6 +28,9 @@
         <field name="model">knowledge.document</field>
         <field name="arch" type="xml">
             <form string="Document">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active"/>
+                </header>
                 <sheet>
                     <widget name="web_ribbon" title="Canceled" bg_color="bg-danger" attrs="{'invisible' : [('state', '!=', 'canceled')]}"/>
                     <div class="oe_title pr-0">
