@@ -40,11 +40,12 @@
                     </div>
                     <group>
                         <group>
-                            <field name="code" />
-                            <field name="owner_id" />
+                            <field name="document_type_id" />
                             <field name="package_id" />
+                            <field name="owner_id" />
                         </group>
                         <group>
+                            <field name="code" />
                             <field name="issue_number" />
                             <field name="issue_date" />
                         </group>

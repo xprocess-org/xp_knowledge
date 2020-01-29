@@ -27,6 +27,8 @@
         'views/knowledge_change_request_item_views.xml',
         'views/knowledge_change_request_views.xml',
         'views/knowledge_distribution_list_views.xml',
+        'views/knowledge_document_type_views.xml',
+        'data/knowledge.document.type.csv'
     ],
     # only loaded in demonstration mode
     # 'demo': [

@@ -12,8 +12,8 @@ class Document(models.Model):
     package_id = fields.Many2one(
         'knowledge.package', string='Package', required=True)
     code = fields.Char(string='Code')
-    issue_number = fields.Integer(string='Issue Number', default=1)
-    issue_date = fields.Date(string='Issue Date', required=True)
+    issue_number = fields.Integer(string='Issue Number')
+    issue_date = fields.Date(string='Issue Date')
     owner_id = fields.Many2one(
         'res.partner', string='Document Owner', required=True)
     change_item_ids = fields.One2many(
@@ -28,3 +28,5 @@ class Document(models.Model):
         default='draft')
     distribution_list_ids = fields.Many2many(
         'knowledge.distribution.list', string='Distribution lists')
+    document_type_id = fields.Many2one(
+        'knowledge.document.type', string='Document type', required=True)
