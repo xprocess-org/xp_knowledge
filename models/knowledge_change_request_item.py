@@ -25,7 +25,7 @@ class Change(models.Model):
             ('inprogress', 'In Progress'),
             ('done', 'Done'),
             ('reviewed', 'Reviewed'),
-            ('approved', 'Approved'),
+            ('released', 'Released'),
             ('rejected', 'Rejected')],
         default='draft')
     rejection_reason = fields.Text(string='Rejection reason')
