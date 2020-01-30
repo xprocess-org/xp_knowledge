@@ -46,10 +46,10 @@
                             <field name="owner_id" />
                         </group>
                         <group>
-                            <field name="external_document" />
                             <field name="code" />
                             <field name="issue_number" />
                             <field name="issue_date" />
+                            <field name="external_document" />
                         </group>
                     </group>
                     <notebook>
