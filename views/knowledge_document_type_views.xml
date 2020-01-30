@@ -15,8 +15,10 @@
         <field name="arch" type="xml">
             <tree string="Document Type">
                 <field name="name" />
-                <field name="create_uid" />
-                <field name="create_date" />
+                <field name="code" />
+                <field name="issue" />
+                <field name="external_document" />
+                <field name="template"/>
             </tree>
         </field>
     </record>
@@ -33,8 +35,14 @@
                         </h1>
                     </div>
                     <group>
-                        <field name="create_uid" />
-                        <field name="create_date" />
+                        <group>
+                            <field name="code" />
+                            <field name="issue" />
+                        </group>
+                        <group>
+                            <field name="external_document" />
+                            <field name="template" attrs="{'invisible' : [('external_document', '=', True)]}"/>
+                        </group>
                     </group>
                     <notebook>
                         <page name="description" string="Description">
