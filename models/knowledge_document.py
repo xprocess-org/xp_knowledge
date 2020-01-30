@@ -37,8 +37,20 @@ class Document(models.Model):
         'knowledge.document.type', string='Document type', required=True)
     external_document = fields.Binary(string='External Document')
     related_documents = fields.Many2many(
-        'knowledge.document',      # related model (required)
-        'knowledge_document_knowledge_document_rel',  # relation table name to use
-        'id1',             # rel table field for "this" record
-        'id2',             # rel table field for "other" record
-        'Related Documents')          # string label text
+        'knowledge.document',
+        'knowledge_document_knowledge_document_rel',
+        'id1',
+        'id2',
+        'Related Documents')
+
+    # document type fields
+    has_code = fields.Boolean(related='document_type_id.code', store=True)
+    has_issue = fields.Boolean(related='document_type_id.issue', store=True)
+    has_external_document = fields.Boolean(
+        related='document_type_id.external_document', store=True)
+    template = fields.Html(related='document_type_id.template', store=True)
+
+    def apply_template(self):
+        for document in self:
+            document.write({'content': document.template})
+        return True

@@ -29,7 +29,11 @@
         <field name="model">knowledge.document</field>
         <field name="arch" type="xml">
             <form string="Document">
+                <field name="has_code" invisible="1" />
+                <field name="has_issue" invisible="1" />
+                <field name="has_external_document" invisible="1" />
                 <header>
+                    <button name="apply_template" string="Apply template" type="object" class="oe_highlight" attrs="{'invisible' : [('state', '!=', 'draft')]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,active"/>
                 </header>
                 <sheet>
@@ -46,14 +50,14 @@
                             <field name="owner_id" />
                         </group>
                         <group>
-                            <field name="code" />
-                            <field name="issue_number" />
-                            <field name="issue_date" />
-                            <field name="external_document" filename="name" />
+                            <field name="code" attrs="{'invisible' : [('has_code', '!=', True)]}" />
+                            <field name="issue_number" attrs="{'invisible' : [('has_issue', '!=', True)]}" />
+                            <field name="issue_date" attrs="{'invisible' : [('has_issue', '!=', True)]}" />
+                            <field name="external_document" filename="name" attrs="{'invisible' : [('has_external_document', '!=', True)]}" />
                         </group>
                     </group>
                     <notebook>
-                        <page name="contents" string="Content">
+                        <page name="contents" string="Content" attrs="{'invisible' : [('has_external_document', '=', True)]}">
                             <field name="content" />
                         </page>
                         <page name="related_documents" string="Related Documents">
