@@ -49,7 +49,7 @@
                             <field name="code" />
                             <field name="issue_number" />
                             <field name="issue_date" />
-                            <field name="external_document" />
+                            <field name="external_document" filename="name" />
                         </group>
                     </group>
                     <notebook>
