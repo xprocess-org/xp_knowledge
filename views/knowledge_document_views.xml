@@ -15,6 +15,7 @@
         <field name="arch" type="xml">
             <tree string="Documents">
                 <field name="name" />
+                <field name="document_type_id" />
                 <field name="code" />
                 <field name="issue_number" />
                 <field name="issue_date" />
@@ -45,6 +46,7 @@
                             <field name="owner_id" />
                         </group>
                         <group>
+                            <field name="external_document" />
                             <field name="code" />
                             <field name="issue_number" />
                             <field name="issue_date" />
@@ -55,6 +57,7 @@
                             <field name="content" />
                         </page>
                         <page name="related_documents" string="Related Documents">
+                            <field name="related_documents" domain="[('name', '!=', name)]" />
                         </page>
                         <page name="distribution_lists" string="Distribution lists">
                             <field name="distribution_list_ids" />
