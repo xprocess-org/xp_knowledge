@@ -12,11 +12,11 @@ class Document(models.Model):
          'Document title must be unique in each package.'),  # Message
     ]
 
-    name = fields.Char('Title', required=True)
+    name = fields.Char('Title', required=True, index=True)
     content = fields.Html(string='Content')
     package_id = fields.Many2one(
         'knowledge.package', string='Package', required=True, ondelete='restrict')
-    code = fields.Char(string='Code')
+    code = fields.Char(string='Code', index=True)
     issue_number = fields.Integer(string='Issue Number')
     issue_date = fields.Date(string='Issue Date')
     owner_id = fields.Many2one(
@@ -30,7 +30,8 @@ class Document(models.Model):
             ('draft', 'Draft'),
             ('active', 'Active'),
             ('canceled', 'Canceled')],
-        default='draft')
+        default='draft',
+        index=True)
     distribution_list_ids = fields.Many2many(
         'knowledge.distribution.list', string='Distribution lists')
     document_type_id = fields.Many2one(
