@@ -15,11 +15,12 @@
         <field name="arch" type="xml">
             <tree string="Documents">
                 <field name="name" />
-                <field name="document_type_id" />
-                <field name="code" />
-                <field name="issue_number" />
-                <field name="issue_date" />
-                <field name="owner_id" />
+                <field name="document_type_id" optional="show" />
+                <field name="package_id" optional="show" />
+                <field name="owner_id" optional="show"/>
+                <field name="code" optional="hide" />
+                <field name="issue_number" optional="hide" />
+                <field name="issue_date" optional="hide" />
             </tree>
         </field>
     </record>
@@ -40,25 +41,25 @@
                     <widget name="web_ribbon" title="Canceled" bg_color="bg-danger" attrs="{'invisible' : [('state', '!=', 'canceled')]}"/>
                     <div class="oe_title pr-0">
                         <h1 class="d-flex flex-row justify-content-between">
-                            <field name="name" class="text-truncate" placeholder="Document Title..."/>
+                            <field name="name" class="text-truncate" placeholder="Document Title..." attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="document_type_id" />
-                            <field name="package_id" />
-                            <field name="owner_id" />
+                            <field name="document_type_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="package_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="owner_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                         </group>
                         <group>
-                            <field name="code" attrs="{'invisible' : [('has_code', '!=', True)]}" />
-                            <field name="issue_number" attrs="{'invisible' : [('has_issue', '!=', True)]}" />
-                            <field name="issue_date" attrs="{'invisible' : [('has_issue', '!=', True)]}" />
-                            <field name="external_document" filename="name" attrs="{'invisible' : [('has_external_document', '!=', True)]}" />
+                            <field name="code" attrs="{'invisible' : [('has_code', '!=', True)], 'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="issue_number" attrs="{'invisible' : [('has_issue', '!=', True)],'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="issue_date" attrs="{'invisible' : [('has_issue', '!=', True)], 'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="external_document" filename="name" attrs="{'invisible' : [('has_external_document', '!=', True)], 'readonly': [('state', '!=', 'draft')]}" />
                         </group>
                     </group>
                     <notebook>
                         <page name="contents" string="Content" attrs="{'invisible' : [('has_external_document', '=', True)]}">
-                            <field name="content" />
+                            <field name="content" attrs="{'readonly': [('state', '!=', 'draft')]}" />
                         </page>
                         <page name="related_documents" string="Related Documents">
                             <field name="related_documents" domain="[('name', '!=', name)]" />
@@ -67,7 +68,7 @@
                             <field name="distribution_list_ids" />
                         </page>
                         <page name="changes" string="Change History">
-                            <field name="change_item_ids" />
+                            <field name="change_item_ids" readonly="1" />
                         </page>
                     </notebook>
                 </sheet>

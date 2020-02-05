@@ -15,12 +15,12 @@ class Document(models.Model):
     name = fields.Char('Title', required=True)
     content = fields.Html(string='Content')
     package_id = fields.Many2one(
-        'knowledge.package', string='Package', required=True)
+        'knowledge.package', string='Package', required=True, ondelete='restrict')
     code = fields.Char(string='Code')
     issue_number = fields.Integer(string='Issue Number')
     issue_date = fields.Date(string='Issue Date')
     owner_id = fields.Many2one(
-        'res.partner', string='Document Owner', required=True)
+        'res.users', string='Document Owner', default=lambda self: self.env.uid, ondelete='restrict', index=True, required=True)
     change_item_ids = fields.One2many(
         'knowledge.change.request.item', 'document_id', string='Change History')
     state = fields.Selection(
@@ -34,14 +34,15 @@ class Document(models.Model):
     distribution_list_ids = fields.Many2many(
         'knowledge.distribution.list', string='Distribution lists')
     document_type_id = fields.Many2one(
-        'knowledge.document.type', string='Document type', required=True)
+        'knowledge.document.type', string='Document type', required=True, ondelete='restrict')
     external_document = fields.Binary(string='External Document')
     related_documents = fields.Many2many(
         'knowledge.document',
         'knowledge_document_knowledge_document_rel',
         'id1',
         'id2',
-        'Related Documents')
+        'Related Documents',
+        ondelete='restrict')
 
     # document type fields
     has_code = fields.Boolean(related='document_type_id.code', store=True)

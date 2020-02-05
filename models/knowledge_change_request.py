@@ -13,7 +13,7 @@ class ChangeRequest(models.Model):
     change_item_ids = fields.One2many(
         'knowledge.change.request.item', 'change_request_id', string='Change Items')
     package_id = fields.Many2one(
-        'knowledge.package', string='Package', required=True)
+        'knowledge.package', string='Package', required=True, ondelete='restrict')
     state = fields.Selection(
         string="Status",
         required=True,
@@ -30,6 +30,8 @@ class ChangeRequest(models.Model):
     def submit_change_request(self):
         for request in self:
             request.write({'state': 'submitted'})
+            for change_item in request.change_item_ids:
+                change_item.write({'state': 'submitted'})
         return True
 
     def approve_change_request(self):
@@ -40,11 +42,15 @@ class ChangeRequest(models.Model):
     def reject_change_request(self):
         for request in self:
             request.write({'state': 'rejected'})
+            for change_item in request.change_item_ids:
+                change_item.write({'state': 'rejected'})
         return True
 
     def open_change_request(self):
         for request in self:
             request.write({'state': 'open'})
+            for change_item in request.change_item_ids:
+                change_item.write({'state': 'inprogress'})
         return True
 
     def close_change_request(self):

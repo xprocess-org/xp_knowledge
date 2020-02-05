@@ -2,12 +2,12 @@
 <odoo>
 
     <record id="knowledge_change_request_item_action" model="ir.actions.act_window">
-        <field name="name">Changes</field>
+        <field name="name">Change Items</field>
         <field name="res_model">knowledge.change.request.item</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="knowledge_change_request_item_menu" name="Changes" action="knowledge_change_request_item_action" parent="configuration_menu" sequence="30" />
+    <menuitem id="knowledge_change_request_item_menu" name="Change Items" action="knowledge_change_request_item_action" parent="configuration_menu" sequence="30" />
 
     <record id="knowledge_change_request_item_view_list" model="ir.ui.view">
         <field name="name">knowledge_change_request_item_list_view</field>
@@ -28,18 +28,27 @@
         <field name="arch" type="xml">
             <form string="Change Item">
                 <header>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,inprogress,done,reviewed,released"/>
+                    <button name="copy_document" string="Copy document" type="object" class="oe_highlight" attrs="{'invisible' : [('state', 'not in', ['draft','submitted', 'inprogress'])]}" />
+                    <button name="reject_change_item" string="Reject" type="object" attrs="{'invisible' : [('state', '!=', 'submitted')]}" />
+                    <button name="mark_done" string="Mark as done" type="object" class="oe_highlight" attrs="{'invisible' : [('state', '!=', 'inprogress')]}" />
+                    <button name="mark_reviewed" string="Mark as reviewed" type="object" class="oe_highlight" attrs="{'invisible' : [('state', '!=', 'done')]}" />
+                    <button name="release_changes" string="Release changes" type="object" class="oe_highlight" attrs="{'invisible' : [('state', '!=', 'reviewed')]}" />
+                    <button name="mark_not_done" string="need modification" type="object" attrs="{'invisible' : [('state', 'not in', ['done', 'reviewed'])]}" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,inprogress,done,reviewed,released"/>
                 </header>
                 <sheet>
                     <div class="oe_title pr-0">
                         <h1 class="d-flex flex-row justify-content-between">
-                            <field name="name" class="o_task_name text-truncate" placeholder="Summary..."/>
+                            <field name="name" class="o_task_name text-truncate" placeholder="Summary..." attrs="{'readonly': [('state', '=', 'released')]}"/>
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="change_request_id" />
-                            <field name="document_id" />
+                            <field name="change_request_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="document_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="cancel" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="document_issue_number" readonly="1" attrs="{'invisible' : ['|', ('state', '!=', 'released'), ('cancel', '=', True)]}" />
+                            <field name="document_issue_date" readonly="1" attrs="{'invisible' : ['|', ('state', '!=', 'released'), ('cancel', '=', True)]}" />
                         </group>
                         <group>
                             <field name="editor_id" />
@@ -49,7 +58,7 @@
                     </group>
                     <notebook>
                         <page name="content" string="Draft">
-                            <field name="content" />
+                            <field name="content" attrs="{'readonly': [('state', 'not in', ['draft', 'submitted', 'inprogress'])]}" />
                         </page>
                     </notebook>
                 </sheet>

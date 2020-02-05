@@ -9,8 +9,10 @@ class Package(models.Model):
 
     name = fields.Char('Title', required=True)
     description = fields.Html(string='Description')
-    owner_id = fields.Many2one('res.partner', string='Package Manager')
-    approver_id = fields.Many2one('res.partner', string='Package Approver')
+    owner_id = fields.Many2one(
+        'res.users', string='Package Manager', default=lambda self: self.env.uid, ondelete='restrict', required=True)
+    approver_id = fields.Many2one(
+        'res.users', string='Package Approver', default=lambda self: self.env.uid, ondelete='restrict', required=True)
     visibility = fields.Selection([
         ('followers', 'Distribution list'),
         ('employees', 'All employees'),
