@@ -93,7 +93,7 @@
                 <filter name="canceled" string="Canceled documents" domain="[('state', '=', 'canceled')]" />
 
                 <group expand="0" string="Group By">
-                    <filter name="package_id" string="Package" context="{'group_by': 'package_id'}"/>
+                    <filter name="package" string="Package" context="{'group_by': 'package_id'}"/>
                     <filter name="document_type" string="Document type" context="{'group_by': 'document_type_id'}"/>
                     <filter name="document_owner" string="Document owner" context="{'group_by': 'owner_id'}"/>
                     <filter name="status" string="Status" context="{'group_by': 'state'}"/>
