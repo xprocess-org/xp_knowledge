@@ -71,5 +71,19 @@
             </form>
         </field>
     </record>
+    <record id="knowledge_change_request_item_view_search" model="ir.ui.view">
+        <field name="name">knowledge_change_request_item_search_view</field>
+        <field name="model">knowledge.change.request.item</field>
+        <field name="arch" type="xml">
+            <search string="Change request item">
+                <field name="name" />
 
+                <group expand="0" string="Group By">
+                    <filter name="change_request" string="Change request" context="{'group_by': 'change_request_id'}"/>
+                    <filter name="document" string="Document" context="{'group_by': 'document_id'}"/>
+                    <filter name="status" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
 </odoo>

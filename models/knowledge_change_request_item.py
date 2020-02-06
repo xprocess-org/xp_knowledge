@@ -8,7 +8,7 @@ class Change(models.Model):
     _description = 'Change'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char('Summary', required=True)
+    name = fields.Char('Summary', required=True, index=True)
     content = fields.Html(string='Content')
     change_request_id = fields.Many2one(
         'knowledge.change.request', string='Change request', ondelete='restrict')
