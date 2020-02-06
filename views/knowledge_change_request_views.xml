@@ -5,6 +5,7 @@
         <field name="name">Change Requests</field>
         <field name="res_model">knowledge.change.request</field>
         <field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_my_requests': 1}"/>
     </record>
 
     <menuitem id="knowledge_change_request_menu" name="Change Requests" action="knowledge_change_request_action" parent="knowledge_menu" sequence="20" />
@@ -15,8 +16,9 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="name" />
-                <field name="create_uid" />
-                <field name="create_date" />
+                <field name="package_id" />
+                <field name="create_uid" string='Requested by' />
+                <field name="create_date" string='Requested on' />
                 <field name="state" />
             </tree>
         </field>
@@ -46,8 +48,8 @@
                     </div>
                     <group>
                         <group>
-                            <field name="create_uid" />
-                            <field name="create_date" />
+                            <field name="create_uid" string='Requested by' />
+                            <field name="create_date" string='Requested on' />
                         </group>
                         <group>
                             <field name="package_id" attrs="{'readonly': [('state', '!=', 'draft')]}" />
@@ -71,5 +73,22 @@
             </form>
         </field>
     </record>
+    <record id="knowledge_change_request_view_search" model="ir.ui.view">
+        <field name="name">knowledge_change_request_search_view</field>
+        <field name="model">knowledge.change.request</field>
+        <field name="arch" type="xml">
+            <search string="Change requests">
+                <field name="name" />
 
+                <filter name="my_requests" string="My requests" domain="[('create_uid', '=', uid)]"/>
+
+                <group expand="0" string="Group By">
+                    <filter name="package_id" string="Package" context="{'group_by': 'package_id'}"/>
+                    <filter name="document_requester" string="Requester" context="{'group_by': 'create_uid'}"/>
+                    <filter name="document_date" string="Date" context="{'group_by': 'create_date'}"/>
+                    <filter name="status" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
 </odoo>

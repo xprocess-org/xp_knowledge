@@ -8,7 +8,7 @@ class ChangeRequest(models.Model):
     _description = 'Change request'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char('Title', required=True)
+    name = fields.Char('Title', required=True, index=True)
     description = fields.Html('Details')
     change_item_ids = fields.One2many(
         'knowledge.change.request.item', 'change_request_id', string='Change Items')
