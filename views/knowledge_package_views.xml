@@ -4,40 +4,61 @@
     <record id="knowledge_package_action" model="ir.actions.act_window">
         <field name="name">Packages</field>
         <field name="res_model">knowledge.package</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
-    <record id="knowledge_package_overview_action" model="ir.actions.act_window">
-        <field name="name">Packages Overview</field>
-        <field name="res_model">knowledge.package</field>
-        <field name="view_mode">kanban</field>
-    </record>
-
-    <menuitem id="knowledge_package_menu" name="Packages" action="knowledge_package_action" parent="configuration_menu" sequence="10" />
-    <menuitem id="knowledge_package_menu_overview" name="Overview" action="knowledge_package_overview_action" parent="knowledge_menu" sequence="10" />
+    <menuitem id="knowledge_package_menu_overview" name="Packages" action="knowledge_package_action" parent="knowledge_menu" sequence="10" />
 
     <record id="knowledge_package_view_kanban" model="ir.ui.view">
-        <field name="name">knowledge.package.kanban.view</field>
+        <field name="name">knowledge_package_view_kanban</field>
         <field name="model">knowledge.package</field>
         <field name="arch" type="xml">
-            <kanban>
-                <field name="name" />
+            <kanban class="oe_background_grey o_kanban_dashboard xp_package_kanban o_emphasize_colors">
+                <field name="name"/>
                 <field name="owner_id" />
-                <field name="approver_id" />
-                <field name="color" />
+                <field name="color"/>
+                <field name="document_count"/>
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
-                            <div class="oe_kanban_details">
-                                <strong class="o_kanban_record_title">
-                                    <t t-esc="record.name.value" />
-                                </strong>
-                                <div t-if="record.owner_id.value">
-                                    <t t-esc="record.owner_id.value"/>
+                        <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click o_has_icon">
+                            <div class="xp_package_kanban_main">
+                                <div class="o_kanban_card_content">
+                                    <div class="o_kanban_primary_left">
+                                        <div class="o_primary">
+                                            <span>
+                                                <t t-esc="record.name.value"/>
+                                            </span>
+                                            <span>
+                                                <strong>
+                                                    <t t-esc="record.owner_id.value"/>
+                                                </strong>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div t-if="record.approver_id.value">
-                                    <t t-esc="record.approver_id.value"/>
+                                <div class="o_dropdown_kanban dropdown" t-if="!selection_mode" groups="base.group_user">
+                                    <a role="button" class="dropdown-toggle o-no-caret btn" data-toggle="dropdown" data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <a t-if="widget.editable" role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                                        <a t-if="widget.deletable" role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="xp_package_kanban_boxes">
+                                <a class="xp_package_kanban_box" name="%(knowledge_document_action)d" type="action">
+                                    <div>
+                                        <span class="o_value">
+                                            <t t-esc="record.document_count.value"/>
+                                        </span>
+                                        <span class="o_label">
+                                            Document
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </t>

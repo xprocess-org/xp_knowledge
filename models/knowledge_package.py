@@ -23,3 +23,23 @@ class Package(models.Model):
     request_ids = fields.One2many(
         'knowledge.change.request', 'package_id', string='Requests')
     color = fields.Integer('Color Index')
+    document_count = fields.Integer(
+        compute='_compute_document_count', string='Document count')
+    request_count = fields.Integer(
+        compute='_compute_request_count', string='Request count')
+
+    def _compute_document_count(self):
+        document_data = self.env['knowledge.document'].read_group(
+            [('package_id', 'in', self.ids)], ['package_id'], ['package_id'])
+        result = dict((data['package_id'][0], data['package_id_count'])
+                      for data in document_data)
+        for document in self:
+            document.document_count = result.get(document.id, 0)
+
+    def _compute_request_count(self):
+        request_data = self.env['knowledge.change.request'].read_group(
+            [('package_id', 'in', self.ids)], ['package_id'], ['package_id'])
+        result = dict((data['package_id'][0], data['package_id_count'])
+                      for data in request_data)
+        for request in self:
+            request.request_count = result.get(request.id, 0)

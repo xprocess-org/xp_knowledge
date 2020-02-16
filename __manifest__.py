@@ -22,6 +22,7 @@
         'security/knowledge_groups.xml',
         'security/ir.model.access.csv',
         'views/knowledge_menus.xml',
+        'views/knowledge_assets.xml',
         'views/knowledge_package_views.xml',
         'views/knowledge_document_views.xml',
         'views/knowledge_change_request_item_views.xml',
