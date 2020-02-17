@@ -7,6 +7,24 @@
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
+    <record id="knowledge_document_count_action" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">knowledge.document</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'search_default_package_id': [active_id]}
+        </field>
+    </record>
+
+    <record id="knowledge_change_request_count_action" model="ir.actions.act_window">
+        <field name="name">Change Requests</field>
+        <field name="res_model">knowledge.change.request</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{
+            'search_default_package_id': [active_id]}
+        </field>
+    </record>
+
     <menuitem id="knowledge_package_menu_overview" name="Packages" action="knowledge_package_action" parent="knowledge_menu" sequence="10" />
 
     <record id="knowledge_package_view_kanban" model="ir.ui.view">
@@ -49,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="xp_package_kanban_boxes">
-                                <a class="xp_package_kanban_box" name="%(knowledge_document_action)d" type="action">
+                                <a class="xp_package_kanban_box" name="%(knowledge_document_count_action)d" type="action">
                                     <div>
                                         <span class="o_value">
                                             <t t-esc="record.document_count.value"/>
@@ -85,6 +103,14 @@
         <field name="arch" type="xml">
             <form string="Package">
                 <sheet>
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button class="oe_stat_button" type="action" name="%(knowledge_document_count_action)d" icon="fa-file-text-o">
+                            <field string="Document" name="document_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="action" name="%(knowledge_change_request_count_action)d" icon="fa-files-o">
+                            <field string="Request" name="request_count" widget="statinfo"/>
+                        </button>
+                    </div>
                     <div class="oe_title pr-0">
                         <h1 class="d-flex flex-row justify-content-between">
                             <field name="name" class="text-truncate" placeholder="Package Title..."/>
@@ -102,12 +128,6 @@
                     <notebook>
                         <page name="description" string="Description">
                             <field name="description" />
-                        </page>
-                        <page name="documents" string="Documents">
-                            <field name="document_ids" />
-                        </page>
-                        <page name="requests" string="Change Requests">
-                            <field name="request_ids" />
                         </page>
                     </notebook>
                 </sheet>

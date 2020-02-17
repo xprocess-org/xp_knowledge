@@ -5,10 +5,7 @@
         <field name="name">Documents</field>
         <field name="res_model">knowledge.document</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{
-            'search_default_package_id': [active_id],
-            'default_package_id': active_id,}
-        </field>
+        <field name="context" eval="{'search_default_my_documents': 1}"/>
     </record>
 
     <menuitem id="knowledge_document_menu" name="Documents" action="knowledge_document_action" parent="configuration_menu" sequence="20" />

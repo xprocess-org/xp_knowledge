@@ -138,11 +138,10 @@
         <field name="arch" type="xml">
             <search string="Change requests">
                 <field name="name" />
-
+                <field name="package_id" />
                 <filter name="my_requests" string="My requests" domain="[('create_uid', '=', uid)]"/>
-
                 <group expand="0" string="Group By">
-                    <filter name="package_id" string="Package" context="{'group_by': 'package_id'}"/>
+                    <filter name="package" string="Package" context="{'group_by': 'package_id'}"/>
                     <filter name="document_requester" string="Requester" context="{'group_by': 'create_uid'}"/>
                     <filter name="document_date" string="Date" context="{'group_by': 'create_date'}"/>
                     <filter name="status" string="Status" context="{'group_by': 'state'}"/>
