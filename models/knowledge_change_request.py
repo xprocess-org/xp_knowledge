@@ -40,6 +40,17 @@ class ChangeRequest(models.Model):
     sequence = fields.Integer(string='Sequence', index=True, default=10,
                               help="Gives the sequence order when displaying a list of requests.")
 
+    change_item_count = fields.Integer(
+        compute='_compute_change_item_count', string='Item')
+
+    def _compute_change_item_count(self):
+        change_item_data = self.env['knowledge.change.request.item'].read_group(
+            [('change_request_id', 'in', self.ids)], ['change_request_id'], ['change_request_id'])
+        result = dict((data['change_request_id'][0], data['change_request_id_count'])
+                      for data in change_item_data)
+        for change_item in self:
+            change_item.change_item_count = result.get(change_item.id, 0)
+
     def submit_change_request(self):
         for request in self:
             request.write({'state': 'submitted'})
