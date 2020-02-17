@@ -7,6 +7,7 @@ class Change(models.Model):
     _name = 'knowledge.change.request.item'
     _description = 'Change'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = "priority desc, sequence, id desc"
 
     name = fields.Char('Summary', required=True, index=True)
     content = fields.Html(string='Content')
@@ -29,8 +30,19 @@ class Change(models.Model):
             ('reviewed', 'Reviewed'),
             ('released', 'Released'),
             ('rejected', 'Rejected')],
-        default='draft')
+        group_expand='_expand_states',
+        copy=False,
+        default='draft'
+    )
     rejection_reason = fields.Text(string='Rejection reason')
+
+    color = fields.Integer()
+    priority = fields.Selection([
+        ('0', 'Normal'),
+        ('1', 'Important'),
+    ], default='0', index=True, string="Priority")
+    sequence = fields.Integer(string='Sequence', index=True, default=10,
+                              help="Gives the sequence order when displaying a list of requests.")
 
     editor_id = fields.Many2one(
         related='document_id.owner_id', string='Editor')
@@ -86,3 +98,6 @@ class Change(models.Model):
                     'state': 'active',
                 })
         return True
+
+    def _expand_states(self, states, domain, order):
+        return [key for key, val in type(self).state.selection]
