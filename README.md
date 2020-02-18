@@ -6,7 +6,7 @@ This module developed mainly to support quality system documentation like ISO 90
 
 ## The Motivation
 
-I worked as a quality assurance manager for two years and i know that, if you want to build a strong conpany you need to write every thing related to its processes down to produce a good product every single time. even if its note perfect at firts, system documentation will help you to maintain stable work flow which can be improved over time.
+I worked as a quality assurance manager for two years and i know that, if you want to build a strong company you need to write every thing related to its processes down to produce a good product every single time. even if its not perfect at first, system documentation will help you to maintain stable work flow which can be improved over time.
 
 ## Common use cases
 
