@@ -2,11 +2,11 @@
   <img src="static/src/img/main screen.png" alt="Knowledge" width="800" />
 </p>
 
-This module developed mainly to support quality system documentation like ISO 9001. but for better utilization it designed to support any kind of controlled documentation within the company
+This module developed mainly to support quality system documentation like ISO 9001. but for better utilization it designed to support any kind of controlled documentation within the company.
 
 ## The Motivation
 
-I worked as a quality assurance manager for two years and i know that, if you want to build a strong company you need to write every thing related to its processes down to produce a good product every single time. even if its not perfect at first, system documentation will help you to maintain stable work flow which can be improved over time.
+I worked as a quality assurance manager for two years and i know that, if you want to build a strong company you need to write every thing related to its processes down to produce a good product every single time. even if its not perfect at first, system documentation will help you to maintain stable workflow which can be improved over time.
 
 ## Common use cases
 
